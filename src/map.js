@@ -249,7 +249,7 @@ function fillColor(feature) {
         fillColor: (currentStyle && currentStyle !== 'default' && feature.properties[currentStyle]) ? setProColor(feature.properties[currentStyle]) : '#c3bfc2',
         weight: 0.6,
         opacity: 0.1,
-        color: (currentStyle && currentStyle !== 'default') ? '#c3bfc2' : '#c3bfc2', 
+        color: (currentStyle && currentStyle !== 'default') ? 'white' : '#c3bfc2', 
         fillOpacity: (currentStyle && currentStyle !== 'default') ? 0.9 : 0.5,
     };
 }
