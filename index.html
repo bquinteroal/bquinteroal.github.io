@@ -30,12 +30,13 @@
 
         .container {
             position: absolute;
-            top: 20%;
+            top: 23%;
             left: 10px;
             z-index: 999;
             background-color: #FFFFFF;
             padding: 10px;
             border-radius: 7px;
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
         }
 
         #logoContainer {
@@ -57,23 +58,23 @@
             background: #ffffff;
             position: absolute;
             z-index: 999;
-            bottom: 30px;
+            bottom: 20px;
             left: 10px;
             padding: 0px 10px;
             width: 200px;
-            font-family: arial;
-            font-size: small;
             -webkit-border-radius: 4px 4px 4px 4px;
             border-radius: 4px 4px 4px 4px;
             -webkit-box-shadow: 0px 1px 5px rgba(153, 153, 153, 1);
             -moz-box-shadow: 0px 1px 5px rgba(153, 153, 153, 1);
             box-shadow: 0px 1px 5px rgba(153, 153, 153, 1);
             float: left;
+            font: 12px/12px Segoe UI, Segoe UI, Segoe UI;
+            text-align: left;
         }
 
         #legend,
         #colors {
-            font: 12px/14px Segoe UI, Segoe UI, Segoe UI;
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
             text-align: left;
         }
 
@@ -83,7 +84,7 @@
             background: #ffffff;
             background: rgba(255, 255, 255, 0.8);
             border: rgb(255, 255, 255);
-            font: 10px/14px Segoe UI, Segoe UI, Segoe UI;
+            font: 10px/12px Segoe UI, Segoe UI, Segoe UI;
             width: 200px;
             left: 10px;
             cursor: pointer;
@@ -106,6 +107,7 @@
             background: rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
+            column: 2;
         }
 
         .info h4 {
@@ -141,6 +143,7 @@
 </div>
 
 <div class="container">
+    <b>Seleccione indicador:</b>
     <div class="btn-group">
         <input name="layers" type="radio" id="dis_salud" value="dis_salud" checked onclick='changeIndi(this);'>
         <label for="dis_salud">Proximidad equipamientos de salud</label><br>
@@ -158,13 +161,12 @@
 </div>
 
 
+<div id="logoContainer">
+    <img src="images/logo1.png" width="100%">
+</div>
+
 <div id="map">
-    <div id="logoContainer">
-        <img src="images/logo1.png" width="100%">
-    </div>
-    <script src='src/map.js'></script>
-
-
+<script src='src/map.js'></script>
 </div>
 
 

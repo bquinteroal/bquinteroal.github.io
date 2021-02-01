@@ -135,35 +135,28 @@ function onEachFeature(feature, layer) {
 function style(feature) {
     return {
         weight: 0.6,
-        opacity: 0.4,
-        color: '#c3bfc2',
-        fillOpacity: 0.3,
-        fillColor: '#c3bfc2'
+        opacity: 0.5,
+        color: false,
+        fillColor: false
     };
 }
 
 function changeLegend(props) {
     var _legend = document.getElementById('legend'); // create a div with a class "info"
     _legend.innerHTML = (props ?
-        `<p style="font-size: 12px"><strong>${props.title}</strong></p>
+        `<p style="font-size: 11px"><strong>${props.title}</strong></p>
             <p style="font-size: 10px">${props.subtitle}</p>
             <p id='colors'>
-                <span style='color:#c3bfc2'>▉</span>Sin información<br>
+                <span style='color:#c3bfc2'>▉</span>${props.elem6}<br>
                 <span style='color:#1a9641'>▉</span>${props.elem1}<br>
                 <span style='color:#a6d96a'>▉</span>${props.elem2}<br>
                 <span style='color:#f4f466'>▉</span>${props.elem3}<br>
                 <span style='color:#fdae61'>▉</span>${props.elem4}<br>
                 <span style='color:#d7191c'>▉</span>${props.elem5}
             </p>` :
-        `<p style="font-size: 12px"><strong>Proximidad</strong></p>
-            <p style="font-size: 10px">Distancia en m</p>
+        `<p style="font-size: 12px"><strong>Área urbana</strong></p>
             <p id='colors'>
-                <span style='color:#c3bfc2'>▉</span>Sin información<br>
-                <span style='color:#1a9641'>▉</span>Menor 300<br>
-                <span style='color:#a6d96a'>▉</span>301 - 501<br>
-                <span style='color:#f4f466'>▉</span>501 - 700<br>
-                <span style='color:#fdae61'>▉</span>701 - 1000<br>
-                <span style='color:#d7191c'>▉</span>Mayor 100
+                <span style='color:#c3bfc2'>▉</span>Manzanas<br>
             </p>`);
 }
 
@@ -176,6 +169,7 @@ var legends = {
         elem3: "501 - 701",
         elem4: "701 - 1000",
         elem5: "Mayor 1000",
+        elem6: "Sin información",
     },
     dis_educa: {
         title: "Proximidad equipamientos de educación",
@@ -185,15 +179,17 @@ var legends = {
         elem3: "501 - 701",
         elem4: "701 - 1000",
         elem5: "Mayor 1000",
+        elem6: "Sin información",
     },
     dis_biblio: {
-        title: "Proximidad espacios públicos",
+        title: "Proximidad bibliotecas",
         subtitle: "Distancia en m",
         elem1: "Menor 300",
         elem2: "301 - 501",
         elem3: "501 - 701",
         elem4: "701 - 1000",
         elem5: "Mayor 1000",
+        elem6: "Sin información",
     },
     dis_ep: {
         title: "Proximidad espacios públicos",
@@ -203,6 +199,7 @@ var legends = {
         elem3: "501 - 701",
         elem4: "701 - 1000",
         elem5: "Mayor 1000",
+        elem6: "Sin información",
     },
     viv_ade: {
         title: "Vivienda Adecuada",
@@ -212,14 +209,22 @@ var legends = {
         elem3: "36 - 65",
         elem4: "16 - 35",
         elem5: "Menor 15",
+        elem6: "Sin información",
     }
+    
 }
+
 
 var indi = L.geoJson(Manzana, {
     style: legends.dis_salud,
 }).addTo(map);
 
 var currentStyle = 'dis_salud';
+
+manzanas = L.geoJson(Manzana, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(map);
 
 
 function setProColor(d) {
@@ -243,9 +248,9 @@ function fillColor(feature) {
     return {
         fillColor: (currentStyle && currentStyle !== 'default' && feature.properties[currentStyle]) ? setProColor(feature.properties[currentStyle]) : '#c3bfc2',
         weight: 0.6,
-        opacity: 0.4,
-        color: (currentStyle && currentStyle !== 'default') ? 'white' : '#c3bfc2',
-        fillOpacity: (currentStyle && currentStyle !== 'default') ? 0.9 : 0.3,
+        opacity: 0.1,
+        color: (currentStyle && currentStyle !== 'default') ? '#c3bfc2' : '#c3bfc2', 
+        fillOpacity: (currentStyle && currentStyle !== 'default') ? 1 : 0.5,
     };
 }
 
@@ -254,21 +259,18 @@ function changeIndi(style) {
     indi.setStyle(fillColor);
     changeLegend((style.value && legends[style.value]) ? legends[style.value] :
         {
-            title: "Proximidad equipamientos de salud",
-            subtitle: "Distancia en m",
-            elem1: "Menor 300",
-            elem2: "301 - 501",
-            elem3: "501 - 701",
-            elem4: "701 - 1000",
-            elem5: "Mayor 1001",
+            title: "Área urbana",
+            subtitle: "Cúcuta y Villa del Rosario",
+            elem1: "No aplica",
+            elem2: "No aplica",
+            elem3: "No aplica",
+            elem4: "No aplica",
+            elem5: "No aplica",
+            elem6: "Manzanas",
+            
         });
 }
 
-
-manzanas = L.geoJson(Manzana, {
-    style: style,
-    onEachFeature: onEachFeature
-}).addTo(map);
 
 
 var baseMaps = {
@@ -279,7 +281,6 @@ var baseMaps = {
 
 // Defines the overlay maps. For now this variable is empty, because we haven't created any overlay layers
 var overlayMaps = {
-    'Manzanas': manzanas,
     'Comunas': comu,
     'Límite fronterizo con Venezuela': lim
 };
@@ -293,7 +294,6 @@ changeIndi({value: 'dis_salud'});
 
 
 function popupText(feature, layer) {
-
     layer.bindPopup('<strong>Comuna: </strong>' + feature.properties.comuna + '<br />')
 }
     
