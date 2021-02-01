@@ -136,8 +136,8 @@ function style(feature) {
     return {
         weight: 0.6,
         opacity: 0.5,
-        color: false,
-        fillColor: false
+        color: 'white',
+        fillOpacity: 0.1,
     };
 }
 
@@ -250,7 +250,7 @@ function fillColor(feature) {
         weight: 0.6,
         opacity: 0.1,
         color: (currentStyle && currentStyle !== 'default') ? '#c3bfc2' : '#c3bfc2', 
-        fillOpacity: (currentStyle && currentStyle !== 'default') ? 1 : 0.5,
+        fillOpacity: (currentStyle && currentStyle !== 'default') ? 0.9 : 0.5,
     };
 }
 
