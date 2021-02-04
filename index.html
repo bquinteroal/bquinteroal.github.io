@@ -107,7 +107,6 @@
             background: rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
-            column: 2;
         }
 
         .info h4 {
@@ -144,16 +143,24 @@
 <div class="container">
     <b>Seleccione indicador:</b>
     <div class="btn-group">
-        <input name="layers" type="radio" id="dis_salud" value="dis_salud" checked onclick='changeIndi(this);'>
-        <label for="dis_salud">Proximidad equipamientos de salud</label><br>
-        <input name="layers" type="radio" id="dis_educa" value="dis_educa" onclick='changeIndi(this);'>
-        <label for="dis_educa">Proximidad equipamientos de educación</label><br>
-        <input name="layers" type="radio" id="dis_biblio" value="dis_biblio" onclick='changeIndi(this);'>
-        <label for="dis_biblio">Proximidad bibliotecas</label><br>
-        <input name="layers" type="radio" id="dis_ep" value="dis_ep" onclick='changeIndi(this);'>
-        <label for="dis_ep">Proximidad espacio público</label><br>
-        <input name="layers" type="radio" id="viv_ade" value="viv_ade" onclick='changeIndi(this);'>
-        <label for="viv_ade">Vivienda adecuada</label><br>
+        <input name="layers" type="radio" id="DIS_SALUD" value="DIS_SALUD" checked onclick='changeIndi(this);'>
+        <label for="DIS_SALUD">Proximidad equipamientos de salud</label><br>
+        <input name="layers" type="radio" id="DIS_EDUCA" value="DIS_EDUCA" onclick='changeIndi(this);'>
+        <label for="DIS_EDUCA">Proximidad equipamientos de educación</label><br>
+        <input name="layers" type="radio" id="DIS_BIBLIO" value="DIS_BIBLIO" onclick='changeIndi(this);'>
+        <label for="DIS_BIBLIO">Proximidad equipamientos culturales</label><br>
+        <input name="layers" type="radio" id="PRO_A_ESCO" value="PRO_A_ESCO" onclick='changeIndi(this);'>
+        <label for="PRO_A_ESCO">Años promedio educación</label><br>
+        <input name="layers" type="radio" id="MIXTICIDAD" value="MIXTICIDAD" onclick='changeIndi(this);'>
+        <label for="MIXTICIDAD">Diversidad usos del suelo</label><br>
+        <input name="layers" type="radio" id="DIS_EP" value="DIS_EP" onclick='changeIndi(this);'>
+        <label for="DIS_EP">Proximidad espacio público</label><br>
+        <input name="layers" type="radio" id="VIV_ADE" value="VIV_ADE" onclick='changeIndi(this);'>
+        <label for="VIV_ADE">Vivienda adecuada</label><br>
+        <input name="layers" type="radio" id="AGUA_MEJOR" value="AGUA_MEJOR" onclick='changeIndi(this);'>
+        <label for="AGUA_MEJOR">Acceso a agua mejorada</label><br>
+        <input name="layers" type="radio" id="SANEAMIENT" value="SANEAMIENT" onclick='changeIndi(this);'>
+        <label for="SANEAMIENT">Acceso a Saneamiento</label><br>
         <input name="layers" type="radio" id="default" value="default" onclick='changeIndi(this);'>
         <label for="default">Área urbana Cúcuta y Villa del Rosario</label><br>
     </div>
