@@ -59,7 +59,7 @@ info.update = function (props) {
 
         '<h4>Oportunidades económicas </h4>' +
         '<b> Desempleo: </b> ' + props.T_DESEMPL.toFixed(0) + ' %' + '<br />' +
-        '<b> Empleo informal: </b> ' + props.EMP_IN_E.toFixed(0) + ' %' + '<br />' +
+        '<b> Empleo informal estricto: </b> ' + props.EMP_IN_E.toFixed(0) + ' %' + '<br />' +
         '<b> Desempleo juvenil: </b> ' + props.DESEM_JUV.toFixed(0) + ' %' : 'Colocar cursor sobre una manzana');
 };
 info.addTo(map);
@@ -163,35 +163,35 @@ function changeLegend(props) {
 }
 
 var legends = {
-    DIS_SALUD: {
+    ZA_SALUD1: {
         title: "Proximidad equipamientos de salud",
-        subtitle: "Distancia en m",
-        elem1: "Menor 300",
-        elem2: "301 - 501",
-        elem3: "501 - 701",
-        elem4: "701 - 1000",
-        elem5: "Mayor 1001",
-        elem6: "Sin información",
+        subtitle: "Pendiente",
+        elem1: "A nivel",
+        elem2: "Ligeramente inclinada",
+        elem3: "Moderadamente inclinada",
+        elem4: "Fuertemente incliniada",
+        elem5: "Escarpada",
+        elem6: "Por fuera de la zona de accesibilidad (> 500 m)",
     },
-    DIS_EDUCA: {
+    ZA_EDUCA1: {
         title: "Proximidad equipamientos de educación",
-        subtitle: "Distancia en m",
-        elem1: "Menor 300",
-        elem2: "301 - 501",
-        elem3: "501 - 701",
-        elem4: "701 - 1000",
-        elem5: "Mayor 1001",
-        elem6: "Sin información",
+        subtitle: "Pendiente",
+        elem1: "A nivel",
+        elem2: "Ligeramente inclinada",
+        elem3: "Moderadamente inclinada",
+        elem4: "Fuertemente incliniada",
+        elem5: "Escarpada",
+        elem6: "Por fuera de la zona de accesibilidad (> 500 m)",
     },
-    DIS_BIBLIO: {
+    ZA_BIBLIO1: {
         title: "Proximidad equipamientos culturales",
-        subtitle: "Distancia en m",
-        elem1: "Menor 300",
-        elem2: "301 - 501",
-        elem3: "501 - 701",
-        elem4: "701 - 1000",
-        elem5: "Mayor 1001",
-        elem6: "Sin información",
+        subtitle: "Pendiente",
+        elem1: "A nivel",
+        elem2: "Ligeramente inclinada",
+        elem3: "Moderadamente inclinada",
+        elem4: "Fuertemente incliniada",
+        elem5: "Escarpada",
+        elem6: "Por fuera de la zona de accesibilidad (> 500 m)",
     },
     PRO_A_ESCO: {
         title: "Años promedio educación",
@@ -213,15 +213,15 @@ var legends = {
         elem5: "0.01 - 0.29",
         elem6: "Sin información"
     },
-    DIS_EP: {
-        title: "Proximidad espacios públicos",
-        subtitle: "Distancia en m",
-        elem1: "Menor 300",
-        elem2: "301 - 501",
-        elem3: "501 - 701",
-        elem4: "701 - 1000",
-        elem5: "Mayor 1001",
-        elem6: "Sin información",
+    ZA_ESPPUB1: {
+        title: "Proximidad espacio público",
+        subtitle: "Pendiente",
+        elem1: "A nivel",
+        elem2: "Ligeramente inclinada",
+        elem3: "Moderadamente inclinada",
+        elem4: "Fuertemente incliniada",
+        elem5: "Escarpada",
+        elem6: "Por fuera de la zona de accesibilidad (> 500 m)",
     },
     VIV_ADE: {
         title: "Vivienda Adecuada",
@@ -253,14 +253,54 @@ var legends = {
         elem5: "Menor 20",
         elem6: "Sin información"
     },  
+    DESEM_JUV: {
+        title: "Desempleo juvenil",
+        subtitle: "% de Personas",
+        elem1: "Menor 4",
+        elem2: "5 - 13",
+        elem3: "14 - 24",
+        elem4: "25 - 46",
+        elem5: "Mayor 47",
+        elem6: "Sin información"
+    }, 
+    INTERNET: {
+        title: "Acceso a internet",
+        subtitle: "% de Viviendas",
+        elem1: "Mayor 86",
+        elem2: "52 - 85",
+        elem3: "33 - 51",
+        elem4: "14 - 32",
+        elem5: "Menor 13",
+        elem6: "Sin información"
+    }, 
+    T_DESEMPL: {
+        title: "Tasa de desempleo",
+        subtitle: "% de Personas",
+        elem1: "Menor 4",
+        elem2: "5 - 9",
+        elem3: "10 - 15",
+        elem4: "16 - 65",
+        elem5: "66 - 83",
+        elem6: "Sin información"
+    }, 
+    EMP_IN_E: {
+        title: "Empleo informal estricto",
+        subtitle: "% de Personas",
+        elem1: "Menor 5",
+        elem2: "6 - 12",
+        elem3: "13 - 25",
+        elem4: "26 - 53",
+        elem5: "54 - 100",
+        elem6: "Sin información"
+    }, 
 }
 
 
 var indi = L.geoJson(Manzana, {
-    style: legends.DIS_SALUD,
+    style: legends.ZA_SALUD1,
 }).addTo(map);
 
-var currentStyle = 'DIS_SALUD';
+var currentStyle = 'ZA_SALUD1';
 
 manzanas = L.geoJson(Manzana, {
     style: style,
@@ -303,11 +343,39 @@ function setProColor(d) {
                     d > 0.29 ? '#fdae61' :
                         '#d7191c';
     }
+    else if (currentStyle === 'DESEM_JUV') {
+                        return d > 46 ? '#d7191c' :
+                        d > 24 ? '#fdae61' :
+                            d > 13 ? '#f4f466' :
+                                d > 4 ? '#a6d96a':
+                                '#1a9641';
+    }
+    else if (currentStyle === 'INTERNET') {
+        return d > 85 ? '#1a9641' :
+            d > 51 ? '#a6d96a' :
+                d > 32 ? '#f4f466' :
+                    d > 13 ? '#fdae61' :
+                        '#d7191c';
+    }
+    else if (currentStyle === 'T_DESEMPL') {
+        return d > 65 ? '#d7191c' :
+                        d > 15 ? '#fdae61' :
+                            d > 9 ? '#f4f466' :
+                                d > 4 ? '#a6d96a':
+                                '#1a9641';
+    }
+    else if (currentStyle === 'EMP_IN_E') {
+        return d > 53 ? '#d7191c' :
+            d > 25 ? '#fdae61' :
+                d > 12 ? '#f4f466' :
+                    d > 5 ? '#a6d96a':
+                    '#1a9641';
+    }
     else {
-        return d > 1000 ? '#d7191c' :
-            d > 700 ? '#fdae61' :
-                d > 500 ? '#f4f466' :
-                    d > 300 ? '#a6d96a' :
+        return d > 4 ? '#d7191c' :
+            d > 3 ? '#fdae61' :
+                d > 2 ? '#f4f466' :
+                    d > 1 ? '#a6d96a' :
                         '#1a9641';
     }
 
@@ -350,8 +418,8 @@ var baseMaps = {
 
 // Defines the overlay maps. For now this variable is empty, because we haven't created any overlay layers
 var overlayMaps = {
-    'Comunas': comu,
-    'Límite fronterizo con Venezuela': lim
+    //'Comunas': comu,
+    //'Límite fronterizo con Venezuela': lim
 };
 
 // Adds a Leaflet layer control, using basemaps and overlay maps defined above
@@ -359,7 +427,7 @@ var layersControl = new L.Control.Layers(baseMaps, overlayMaps, {
     collapsed: true,
 });
 map.addControl(layersControl);
-changeIndi({value: 'DIS_SALUD'});
+changeIndi({value: 'ZA_SALUD1'});
 
 
 function popupText(feature, layer) {
